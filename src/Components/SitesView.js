@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 const Sites = (props) => {
     return (
@@ -22,8 +23,8 @@ const Sites = (props) => {
                             <td>{item.short_link}</td>
                             <td>{item.expiry_date}</td>
                             <td>{item.working.toString()}</td>
-                            <td><button className="btn" name="Edit">Edit</button></td>
-                            <td><button className="btn" name="Edit">Delete</button></td>
+                            <td><Link to={"/edit/" + item.full_link} className="btn">Edit</Link></td>
+                            <td><Link to={"/delete/" + item.full_link} className="btn">Delete</Link></td>
                         </tr>
                     )}
                 </tbody>
