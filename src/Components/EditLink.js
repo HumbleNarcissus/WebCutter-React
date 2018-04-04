@@ -19,14 +19,16 @@ class EditLink extends Component {
         event.preventDefault();
         this.postData();
     }
-
+    
     componentDidMount(){
+        //check if site exists
         fetch('https://webcutter-api.herokuapp.com/site/' + this.props.match.params.link)
             .then(res => {if(res.ok) this.setState({exists: true})})
             .catch(err => console.log("Error while fetching data"));
     }
 
     postData(){
+        //edit link with PUT and redirect to home page
         fetch('https://webcutter-api.herokuapp.com/site/' + this.props.match.params.link, {
             method: 'PUT',
             headers: {
@@ -58,7 +60,7 @@ class EditLink extends Component {
                     </div>
                 </form>
             </div>
-            : <div><h5>That site does not exists.</h5></div>
+            : <div><h5>That site does not exist.</h5></div>
         );
     }
 }
