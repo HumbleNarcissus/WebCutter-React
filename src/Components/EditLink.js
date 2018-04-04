@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 
 class EditLink extends Component {
     constructor(props){
@@ -8,6 +7,18 @@ class EditLink extends Component {
             exists: false,
             query: ''
         }
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+
+    handleChange(event) {
+        this.setState({query: event.target.value})
+    }
+
+    handeSubmit(event) {
+        event.preventDefault();
+        this.postData();
+        this.props.history.push("/");
     }
 
     componentDidMount(){
@@ -35,21 +46,14 @@ class EditLink extends Component {
             this.state.exists
             ?<div>
                 <h5>You are editing site: {this.props.match.params.link} </h5>
-                <form className="col s12">
+                <form className="col s12" onSubmit={this.handeSubmit.bind(this)}>
                     <div className="row">
                         <div className="input-field col s6">
-                        <input type="text" className="form-control" placeholder="Full Link"
-                          value={this.state.query} onChange={ event => {this.setState({query: event.target.value})} }
-                          onKeyPress = {event => {
-                              if (event.key === 'Enter' && this.state.query !== ''){
-                                document.getElementById("btn-post").click();
-                              }
-                          }}
-                        />
+                            <input type="text" className="form-control" placeholder="Full Link"
+                                value={this.state.query} onChange={this.handleChange}
+                            />
                             <label htmlFor="full_link">Full Link</label>
-                            <Link to="/" className="btn" disabled={!this.state.query}
-                                id="btn-post" onClick={()=> this.postData()}
-                            >Submit</Link>
+                            <input id="btn-post" type="submit" className="btn" value="submit"/>
                         </div>
                     </div>
                 </form>
