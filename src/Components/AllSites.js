@@ -12,7 +12,8 @@ class AllSites extends Component {
     }
 
     componentDidMount(){
-        this.fetchData()
+        this.fetchData();
+        
     }
 
     fetchData(){
@@ -29,6 +30,18 @@ class AllSites extends Component {
             .catch(error => console.log("Error while fetching data"))
     }
     
+    grabNewData(){
+        return fetch('https://webcutter-api.herokuapp.com/sites', {method: 'GET'})
+            .then(response => response.json())
+            .then(json => {
+                const data = json.sites;
+                let temp = [];
+                data.forEach(element => temp.push(element));
+                return temp;
+            })
+            .catch(error => console.log("Error while fetching data"))
+    }
+
     render(){
         return(
              <div className="container">

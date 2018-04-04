@@ -18,7 +18,6 @@ class EditLink extends Component {
     handeSubmit(event) {
         event.preventDefault();
         this.postData();
-        this.props.history.push("/");
     }
 
     componentDidMount(){
@@ -38,7 +37,8 @@ class EditLink extends Component {
         })
         .then(res => res.json())
         .catch(error => console.error('Error:', error))
-        .then(response => console.log('Success:', response));
+        .then(response => console.log('Success:', response))
+        .then(redirect => this.props.history.push("/"));
     }
 
     render(){
