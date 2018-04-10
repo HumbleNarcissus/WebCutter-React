@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Sites from './SitesView';
+import Panel from './SitesView';
 
 
 class AllSites extends Component {
@@ -34,7 +34,7 @@ class AllSites extends Component {
         return(
              <div className="container">
                  <h3>All sites:</h3>
-                 <Sites data={this.state.data} />
+                 <Panel data={this.state.data} />
              </div>
         )
     }

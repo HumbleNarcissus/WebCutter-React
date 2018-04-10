@@ -1,10 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-const Sites = (props) => {
+const Panel = (props) => {
     return (
         <div>
-            <table className="striped">
+            <table className="striped responsive-table">
                 <thead>
                     <tr>
                         <th>Full Link</th>
@@ -33,4 +33,4 @@ const Sites = (props) => {
     );
 };
 
-export default Sites;
+export default Panel;
