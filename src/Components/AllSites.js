@@ -38,6 +38,7 @@ class AllSites extends Component {
                  <h3 className="center-align">All sites:</h3>
                  <Panel data={this.state.data} />
                  <Link to={"/add"} className="btn-floating btn-large waves-effect waves-light red right myfloat"><i className="material-icons">+</i></Link>
+                 
              </div>
         )
     }
