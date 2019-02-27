@@ -4,6 +4,7 @@ import './App.css';
 import Navbar from './Components/Layout/Navbar';
 import Sites from './Components/Sites/Sites';
 import store from './store';
+import Login from './Components/auth/Login';
 
 class App extends Component {
   render() {
@@ -11,7 +12,8 @@ class App extends Component {
       <Provider store={store}>
         <div className="App">
           <Navbar />
-          <Sites />
+          {/* <Sites /> */}
+          <Login />
         </div>
       </Provider>
     );
