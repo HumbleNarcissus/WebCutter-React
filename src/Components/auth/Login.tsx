@@ -2,8 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { createStyles, Theme, withStyles, WithStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
+import { Grid } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -12,14 +14,16 @@ const styles = (theme: Theme) =>
       flexWrap: 'wrap',
     },
     textField: {
-      marginLeft: theme.spacing.unit,
-      marginRight: theme.spacing.unit,
+      marginLeft: "auto",
+      marginRight: "auto",
     },
     dense: {
       marginTop: 16,
     },
-    menu: {
-      width: 200,
+    paper: {
+      width: 300,
+      height: 500,
+      marginTop: 20
     },
   });
 
@@ -50,15 +54,30 @@ class OutlinedTextFields extends React.Component<Props, State> {
     const { classes } = this.props;
 
     return (
-      <form className={classes.container} noValidate autoComplete="off">
-        <TextField
-          id="outlined-dense"
-          label="Dense"
-          className={classNames(classes.textField, classes.dense)}
-          margin="dense"
-          variant="outlined"
-        />
-      </form>
+      <Grid container justify="center">
+        <Paper className={classes.paper}>
+          <form className={classes.container} noValidate autoComplete="off">
+            <TextField
+              id="username"
+              label="Username"
+              className={classNames(classes.textField, classes.dense)}
+              margin="dense"
+              variant="outlined"
+            />
+            <TextField
+              id="password"
+              label="Password"
+              className={classNames(classes.textField, classes.dense)}
+              margin="dense"
+              variant="outlined"
+              type="password"
+            />
+            <Button variant="contained" color="primary" className={classNames(classes.textField, classes.dense)}>
+              Login
+            </Button>
+          </form>
+        </Paper>
+      </Grid>
     );
   }
 }
