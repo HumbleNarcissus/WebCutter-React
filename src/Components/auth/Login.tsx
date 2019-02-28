@@ -23,25 +23,6 @@ const styles = (theme: Theme) =>
     },
   });
 
-const currencies = [
-  {
-    value: 'USD',
-    label: '$',
-  },
-  {
-    value: 'EUR',
-    label: '€',
-  },
-  {
-    value: 'BTC',
-    label: '฿',
-  },
-  {
-    value: 'JPY',
-    label: '¥',
-  },
-];
-
 export interface Props extends WithStyles<typeof styles> {}
 
 interface State {
