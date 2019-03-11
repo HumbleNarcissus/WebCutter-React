@@ -30,7 +30,7 @@ const styles = () =>
     },
   });
 
-export interface Props extends WithStyles<typeof styles> {
+interface Props extends WithStyles<typeof styles> {
   loginUser: any,
   history: any
 }
