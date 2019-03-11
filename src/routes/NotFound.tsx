@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
@@ -16,7 +16,9 @@ const styles = {
   }
 };
 
-export interface Props extends WithStyles<typeof styles> {}
+export interface Props extends WithStyles<typeof styles> {
+  history: any
+}
 
 const NotFound = (props: Props) => {
 
@@ -25,15 +27,14 @@ const NotFound = (props: Props) => {
   return (
     <div className={classes.position}>
       <Typography  variant="display3">404</Typography>
-      <Typography className={classes.font} variant="display1">Ta strona nie istnieje.</Typography>
-      {/* <Button color="primary"
+      <Typography className={classes.font} variant="display1">That site does not exist.</Typography>
+      <Button color="primary"
               className={classes.margin}
-              to={"/"}
               variant="contained"
-              component={props => <Link to={"/"} {...props}/>}
               id="hover-dis"
-            >Strona główna
-      </Button> */}
+              href="/"
+            >Home Page
+      </Button>
     </div>
   )
 };

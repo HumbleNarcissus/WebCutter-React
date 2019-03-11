@@ -4,6 +4,7 @@ import React from 'react';
 import Navbar from '../Components/Layout/Navbar';
 import NotFound from './NotFound';
 import Login from '../Components/auth/Login';
+import Register from '../Components/auth/Register';
 
 const Layout = () => (
     <div className="layout">
@@ -15,6 +16,7 @@ const Layout = () => (
             <Switch>
                 {/* auth */}
                 <Route path="/login" component={Login} />
+                <Route path="/register" component={Register} />
                 {/* not found */}
                 <Route path="/not-found" component={NotFound} />
                 <Redirect to="/not-found" />

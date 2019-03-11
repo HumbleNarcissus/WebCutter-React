@@ -26,6 +26,23 @@ export const loginUser: any = (userData: any) => (dispatch: any) => {
     .catch( err => console.error(err))
 };
 
+// Register user
+export const registerUser = ( userData: any, history: any ) => (dispatch: any) => {
+  fetch(`http://localhost/register`, {
+    method: 'post',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    body: JSON.stringify({
+      username: userData.username,
+      password: userData.password,
+      email: userData.email
+    })
+  })
+    .then(() => history.push('/login'))
+    .catch(err => console.error(err))
+};
+
 // Set logged in user
 export const setCurrentUser = (decoded: any)  => {
   return {
