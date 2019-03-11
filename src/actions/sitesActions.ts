@@ -3,7 +3,6 @@ import {GET_SITES} from './action-types';
 export const getSites = () => (dispatch: any) => {
     fetch('http://localhost/sites')
         .then(res => {
-            console.log(res)
             dispatch({
                 type: GET_SITES,
                 data: res

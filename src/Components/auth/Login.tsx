@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { createStyles, Theme, withStyles, WithStyles } from '@material-ui/core/styles';
@@ -7,7 +8,9 @@ import Paper from '@material-ui/core/Paper';
 import { Grid } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 
-const styles = (theme: Theme) =>
+import {loginUser} from '../../actions/authActions';
+
+const styles = () =>
   createStyles({
     container: {
       display: 'flex',
@@ -27,28 +30,49 @@ const styles = (theme: Theme) =>
     },
   });
 
-export interface Props extends WithStyles<typeof styles> {}
-
-interface State {
-  name: string;
-  age: string;
-  multiline: string;
-  currency: string;
+export interface Props extends WithStyles<typeof styles> {
+  loginUser: any,
+  history: any
 }
 
-class OutlinedTextFields extends React.Component<Props, State> {
-  state = {
-    name: 'Cat in the Hat',
-    age: '',
-    multiline: 'Controlled',
-    currency: 'EUR',
-  };
+interface State {
+  username: string,
+  password: string,
+}
 
-  handleChange = (name: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
+class Login extends React.Component<Props, State> {
+
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      username: '',
+      password: ''
+    }
+  }
+
+  handleChange = () => (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
-      [name]: event.target.value,
+      [event.target.name]: event.target.value,
     } as Pick<State, keyof State>);
   };
+
+  componentWillReceiveProps(nextProps: any) {
+    if (nextProps.auth.isAuthenticated) {
+        this.props.history.push('/');
+    }
+  }
+
+  onSubmit = () => (event: any) => {
+    event.preventDefault();
+
+    const userData = {
+      username: this.state.username,
+      password: this.state.password
+    }
+
+    this.props.loginUser(userData);
+  }
 
   render() {
     const { classes } = this.props;
@@ -56,23 +80,27 @@ class OutlinedTextFields extends React.Component<Props, State> {
     return (
       <Grid container justify="center">
         <Paper className={classes.paper}>
-          <form className={classes.container} noValidate autoComplete="off">
+          <form className={classes.container} noValidate autoComplete="off" onSubmit={this.onSubmit()}>
             <TextField
               id="username"
+              name="username"
               label="Username"
               className={classNames(classes.textField, classes.dense)}
               margin="dense"
               variant="outlined"
+              onChange={this.handleChange()}
             />
             <TextField
               id="password"
+              name="password"
               label="Password"
               className={classNames(classes.textField, classes.dense)}
               margin="dense"
               variant="outlined"
               type="password"
+              onChange={this.handleChange()}
             />
-            <Button variant="contained" color="primary" className={classNames(classes.textField, classes.dense)}>
+            <Button type="submit" variant="contained" color="primary" className={classNames(classes.textField, classes.dense)}>
               Login
             </Button>
           </form>
@@ -82,8 +110,15 @@ class OutlinedTextFields extends React.Component<Props, State> {
   }
 }
 
-(OutlinedTextFields as React.ComponentClass<Props>).propTypes = {
+(Login as React.ComponentClass<Props>).propTypes = {
   classes: PropTypes.object.isRequired,
 } as any;
 
-export default withStyles(styles)(OutlinedTextFields);
+const mapStateToProps = (state: any) => ({
+  auth: state.auth,
+  errors: state.errors
+});
+
+const styledComponent = withStyles(styles)(Login);
+
+export default connect(mapStateToProps, { loginUser })(styledComponent);

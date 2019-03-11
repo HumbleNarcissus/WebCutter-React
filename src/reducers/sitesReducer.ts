@@ -8,7 +8,6 @@ const initialState = {
 };
 
 export default (state = initialState, action: SitesActionType) => {
-    console.log(action);
     switch (action.type) {
         case GET_SITES:
             return {
