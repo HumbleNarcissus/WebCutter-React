@@ -7,11 +7,10 @@ class Sites extends Component<any> {
    public componentDidMount() {
        this.props.getSites();
    }
-
+   
    render() {
        return(
             <div>
-                <h1>Hello</h1>
                 <SitesTable data={this.props.sites}/>
             </div> 
        )

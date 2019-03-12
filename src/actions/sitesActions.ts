@@ -8,10 +8,11 @@ export const getSites = () => (dispatch: any) => {
             'Authorization': checkAuthToken() || ""
         }
     })
-    .then(res => {
+    .then(response => response.json())
+    .then(data => {
         dispatch({
             type: GET_SITES,
-            data: res
+            data: data 
         })
     })
     .catch(err => console.error(err));

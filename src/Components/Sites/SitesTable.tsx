@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles, WithStyles, createStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -11,8 +10,10 @@ import Paper from '@material-ui/core/Paper';
 const styles = () => createStyles({
   root: {
     width: '80%',
-    marginTop: 3,
+    marginTop: 20,
     overflowX: 'auto',
+    marginLeft: 'auto',
+    marginRight: 'auto'
   },
   table: {
     minWidth: 700,
@@ -26,31 +27,28 @@ interface Props extends WithStyles<typeof styles> {
 function SitesTable(props: Props) {
   const { classes } = props;
   const { sites } = props.data;
-  
+
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat (g)</TableCell>
-            <TableCell align="right">Carbs (g)</TableCell>
-            <TableCell align="right">Protein (g)</TableCell>
+            <TableCell>Site</TableCell>
+            <TableCell>Shortcut</TableCell>
+            <TableCell>Working</TableCell>
+            <TableCell>Expiry Date</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {sites.map(() => (
-            console.log('x')
-            // <TableRow key={row.id}>
-            //   <TableCell component="th" scope="row">
-            //     {row.name}
-            //   </TableCell>
-            //   <TableCell align="right">{row.calories}</TableCell>
-            //   <TableCell align="right">{row.fat}</TableCell>
-            //   <TableCell align="right">{row.carbs}</TableCell>
-            //   <TableCell align="right">{row.protein}</TableCell>
-            // </TableRow>
+          {sites.map((item: any) => (
+            <TableRow key={item.id}>
+              <TableCell component="th" scope="row">
+                {item.full_link}
+              </TableCell>
+              <TableCell>{item.short_link}</TableCell>
+              <TableCell>{String(item.working)}</TableCell>
+              <TableCell>{item.expiry_date}</TableCell>
+            </TableRow>
           ))}
         </TableBody>
       </Table>
