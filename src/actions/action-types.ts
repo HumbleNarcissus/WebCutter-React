@@ -4,12 +4,12 @@ export const SET_USER: string = 'SET_USER';
 
 interface GetSitesAction {
     type: typeof GET_SITES,
-    payload: []
+    data: any,
 }
 
 interface SetUserAction {
     type: typeof SET_USER,
-    payload: []
+    payload: any
 }
 
 export type SitesActionType = GetSitesAction;

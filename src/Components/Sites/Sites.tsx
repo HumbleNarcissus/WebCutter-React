@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { getSites } from '../../actions/sitesActions';
+import SitesTable from './SitesTable';
 
 class Sites extends Component<any> {
    public componentDidMount() {
        this.props.getSites();
    }
-
+   
    render() {
        return(
             <div>
-                <h1>Hello</h1>
+                <SitesTable data={this.props.sites}/>
             </div> 
        )
    }

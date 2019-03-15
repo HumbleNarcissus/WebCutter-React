@@ -30,7 +30,7 @@ const styles = () =>
     },
   });
 
-export interface Props extends WithStyles<typeof styles> {
+interface Props extends WithStyles<typeof styles> {
   loginUser: any,
   history: any
 }
@@ -59,7 +59,7 @@ class Login extends React.Component<Props, State> {
 
   componentWillReceiveProps(nextProps: any) {
     if (nextProps.auth.isAuthenticated) {
-        this.props.history.push('/');
+        this.props.history.push('/dashboard');
     }
   }
 
