@@ -1,9 +1,12 @@
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
+import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
+import LinkButton from '../../utils/LinkButton';
 
 const styles = {
     root: {
@@ -30,8 +33,12 @@ const NavbarGuest = (props: Props) => {
                 <Typography variant="h6" color="inherit" className={classes.grow}>
                     Webcutter
                 </Typography>
-                <Button color="inherit">Register</Button>
-                <Button color="inherit">Login</Button>
+                <Button color="inherit" 
+                  component={LinkButton("/register")}
+                >Register</Button>
+                <Button color="inherit" 
+                  component={LinkButton("/login")}
+                >Login</Button>
                 </Toolbar>
             </AppBar>
         </div>
