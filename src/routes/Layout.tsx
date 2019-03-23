@@ -6,6 +6,7 @@ import NotFound from './NotFound';
 import Login from '../Components/auth/Login';
 import Register from '../Components/auth/Register';
 import Sites from '../Components/Sites/Sites';
+import PrivateRoute from '../Components/auth/PrivateRoute';
 
 const Layout = () => (
     <div className="layout">
@@ -16,12 +17,13 @@ const Layout = () => (
             <div className="container">
             <Switch>
                 {/* sites */}
-                <Route path="/dashboard" component={Sites} />
+                <PrivateRoute exact path="/" component={Sites} />
+                <PrivateRoute exact path="/dashboard" component={Sites} />
                 {/* auth */}
-                <Route path="/login" component={Login} />
-                <Route path="/register" component={Register} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/register" component={Register} />
                 {/* not found */}
-                <Route path="/not-found" component={NotFound} />
+                <Route exact path="/not-found" component={NotFound} />
                 <Redirect to="/not-found" />
             </Switch>
             </div>
