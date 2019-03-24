@@ -1,36 +1,46 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import NavbarLoggedIn from './NavbarLoggedIn';
+import NavbarGuest from './NavbarGuest';
 
 const styles = {
   root: {
     flexGrow: 1,
   },
+  grow: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
 };
 
-export interface Props extends WithStyles<typeof styles> {}
-
-function Navbar(props: Props) {
-  const { classes } = props;
-
-  return (
-    <div className={classes.root}>
-      <AppBar position="static" color="default">
-        <Toolbar>
-          <Typography variant="h6" color="inherit">
-            Webcutter Admin
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+export interface Props extends WithStyles<typeof styles> {
+  auth: any;
 }
 
-Navbar.propTypes = {
-  classes: PropTypes.object.isRequired,
-} as any;
+class Navbar extends Component<Props, {}> {
+  constructor(props: Props) {
+    super(props);
+  }
 
-export default withStyles(styles)(Navbar);
+  render() {
+    const { isAuthenticated } = this.props.auth;
+
+    return (
+      <div>
+        { isAuthenticated ? <NavbarLoggedIn /> : <NavbarGuest /> }
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = (state: any) => ({
+  auth: state.auth
+});
+
+const styledComponent = withStyles(styles)(Navbar);
+
+export default connect(mapStateToProps, {})(styledComponent);

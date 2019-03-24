@@ -12,7 +12,7 @@ export default (state = initialState, action: SitesActionType) => {
         case GET_SITES:
             return {
                 ...state,
-                sites: [...state.sites],
+                sites: action.data.sites,
                 loading: false
             }
         default:

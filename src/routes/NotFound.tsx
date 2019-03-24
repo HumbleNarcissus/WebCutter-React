@@ -1,8 +1,8 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
+import LinkButton from '../utils/LinkButton';
 
 const styles = {
   font: {
@@ -32,7 +32,7 @@ const NotFound = (props: Props) => {
               className={classes.margin}
               variant="contained"
               id="hover-dis"
-              href="/"
+              component={LinkButton("/dashboard")}
             >Home Page
       </Button>
     </div>

@@ -1,11 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import AppBar from '@material-ui/core/AppBar';
+import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
-import { setCurrentUser } from "../../actions/authActions";
+import LinkButton from '../../utils/LinkButton';
 
 const styles = {
     root: {
@@ -22,17 +23,7 @@ const styles = {
 
 export interface Props extends WithStyles<typeof styles> {}
 
-const logOut = () => {
-   // Logout user
-   localStorage.removeItem('jwtToken');
-   // set curretn user to {}
-   setCurrentUser({});
-   // Redirect to login
-   window.location.href = '/login';
-}
-
-
-const NavbarLoggedIn = (props: Props) => {
+const NavbarGuest = (props: Props) => {
     const { classes } = props;
 
     return (
@@ -42,18 +33,16 @@ const NavbarLoggedIn = (props: Props) => {
                 <Typography variant="h6" color="inherit" className={classes.grow}>
                     Webcutter
                 </Typography>
-                <Button color="inherit" onClick={() => logOut()}>Sign out</Button>
+                <Button color="inherit" 
+                  component={LinkButton("/register")}
+                >Register</Button>
+                <Button color="inherit" 
+                  component={LinkButton("/login")}
+                >Login</Button>
                 </Toolbar>
             </AppBar>
         </div>
     )
 }
 
-const mapStateToProps = (state: any) => ({
-  auth: state.auth
-});
-
-const styledComponent = withStyles(styles)(NavbarLoggedIn);
-
-
-export default connect(mapStateToProps, {setCurrentUser})(styledComponent);
+export default withStyles(styles)(NavbarGuest);
