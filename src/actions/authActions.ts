@@ -17,7 +17,8 @@ export const loginUser: any = (userData: any) => (dispatch: any) => {
     .then(json => {
       // save token in localStorage
       const { auth_token } = json;
-      localStorage.setItem('jwtToken', auth_token);
+      if (auth_token !== undefined)
+        localStorage.setItem('jwtToken', auth_token);
       // decode token
       const decoded = jwt_decode(auth_token);
       // set current user
