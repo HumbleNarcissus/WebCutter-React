@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { getSites } from '../../actions/sitesActions';
 import SitesTable from './SitesTable';
+import Popup from '../Common/Popup';
 
 class Sites extends Component<any> {
    public componentDidMount() {
@@ -12,6 +13,7 @@ class Sites extends Component<any> {
        return(
             <div>
                 <SitesTable data={this.props.sites}/>
+                <Popup />
             </div> 
        )
    }
