@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import { Button, TextField, DialogActions, DialogContent, createStyles } from '@material-ui/core';
+import { addSite } from '../../actions/sitesActions';
 
 const styles = () =>
   createStyles({
@@ -16,7 +18,8 @@ const styles = () =>
 
 
 interface Props extends WithStyles<typeof styles> {
-    classes: any
+    classes: any,
+    addSite: any 
 }
 
 interface State {
@@ -49,6 +52,16 @@ class Popup extends React.Component<Props, State> {
     } as Pick<State, keyof State>);
   };
 
+  onSubmit = () => (event: any) => {
+    event.preventDefault();
+
+    const userData = {
+      site: this.state.site,
+    }
+
+    this.props.addSite(userData);
+  }
+
   render() {
     const {open} = this.state;
     const {classes} = this.props;
@@ -60,30 +73,38 @@ class Popup extends React.Component<Props, State> {
       </Button>
       <Dialog open={open} onClose={this.handleClose} aria-labelledby="simple-dialog-title">
         <DialogTitle id="simple-dialog-title">Add new site</DialogTitle>
+        <form noValidate autoComplete="off" onSubmit={this.onSubmit()}>
         <DialogContent>
-            <label>Site's name</label>
             <TextField
                 autoFocus
+                name="site"
                 margin="dense"
                 id="site"
                 label="Site's name"
                 type="text"
                 fullWidth
-                onChange={this.handleChange}
+                onChange={this.handleChange()}
             />
         </DialogContent>
         <DialogActions>
             <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleClose} type="submit" color="primary">
               Add
             </Button>
         </DialogActions>
+        </form>
       </Dialog>
       </div>
     );
   }
 }
 
-export default withStyles(styles)(Popup);
+const mapStateToProps = (state: any) => ({
+  sites: state.sites,
+});
+
+const styledComponent = withStyles(styles)(Popup);
+
+export default connect(mapStateToProps, { addSite })(styledComponent);
