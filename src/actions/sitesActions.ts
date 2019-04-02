@@ -1,9 +1,8 @@
 import { GET_SITES } from './action-types';
 import { checkAuthToken } from '../utils/checkAuthToken';
-import { Dispatch } from 'react';
 
-export const getSites = () => (dispatch: any) => {
-    fetch('http://localhost/sites', {
+export const getSites = (): any => async (dispatch: any) => {
+    return fetch('http://localhost/sites', {
         headers: {
             "Content-Type": "application/json",
             'Authorization': checkAuthToken() || ""
@@ -19,8 +18,8 @@ export const getSites = () => (dispatch: any) => {
     .catch(err => console.error(err));
 }
 
-export const addSite = (userData: any) => (dispatch: any) => {
-    fetch('http://localhost/sites', {
+export const addSite = (userData: any): any => async (dispatch: any) => {
+    return fetch('http://localhost/sites', {
         method: 'post',
         headers: {
             'Content-type': 'application/json',

@@ -77,7 +77,7 @@ class Register extends React.Component<Props, State> {
     }
 
     if(this.state.password === this.state.password2)
-        this.props.registerUser(userData, this.props.history);
+      this.props.registerUser(userData, this.props.history);
   }
 
   render() {
