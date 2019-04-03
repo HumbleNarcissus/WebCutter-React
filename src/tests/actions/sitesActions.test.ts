@@ -31,8 +31,8 @@ describe('site actions', () => {
         }
 
         nock('http://localhost')
-         .get('/sites') // Route to catch and mock
-         .reply(200, responsebody); // Mock reponse code and data
+         .get('/sites')
+         .reply(200, responsebody);
 
         const exceptedActions = [
             { type: types.GET_SITES, data: responsebody }
