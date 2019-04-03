@@ -6,11 +6,13 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import DeletePopup from '../Common/DeletePopup';
 
 const styles = () => createStyles({
   root: {
     width: '80%',
     marginTop: 20,
+    marginBottom: 20,
     overflowX: 'auto',
     marginLeft: 'auto',
     marginRight: 'auto'
@@ -37,6 +39,7 @@ function SitesTable(props: Props) {
             <TableCell>Shortcut</TableCell>
             <TableCell>Working</TableCell>
             <TableCell>Expiry Date</TableCell>
+            <TableCell></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -48,6 +51,13 @@ function SitesTable(props: Props) {
               <TableCell>{item.short_link}</TableCell>
               <TableCell>{String(item.working)}</TableCell>
               <TableCell>{item.expiry_date}</TableCell>
+              <TableCell>
+                <DeletePopup
+                  site={item.full_link}
+                  buttonTitle={"Delete"}
+                  title={"Delete site from database"}
+                />
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -34,3 +34,15 @@ export const addSite = (userData: any): any => async (dispatch: any) => {
     .catch(err => console.error(err))
     
 }
+
+export const deleteSite = (siteName: string) => async (dispatch: any) => {
+    return fetch(`http://localhost/sites/${siteName}`, {
+        method: 'delete',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': checkAuthToken() || ""
+        },
+    })
+    .then( _ => dispatch(getSites()))
+    .catch(err => console.error(err))
+}
