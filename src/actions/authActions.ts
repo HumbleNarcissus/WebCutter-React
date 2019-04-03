@@ -34,7 +34,7 @@ export const setCurrentUser = (decoded: any)  => {
 }
 
 const fetchRegister = async (userData: any) => {
-  await fetch(`http://localhost/register`, {
+  return fetch(`http://localhost/register`, {
     method: 'post',
     headers: {
       'Content-type': 'application/json',
@@ -48,7 +48,7 @@ const fetchRegister = async (userData: any) => {
 }
 
 const fetchLogin = async (userData: any) => {
-  fetch(`http://localhost/login`, {
+  return fetch(`http://localhost/login`, {
       method: 'post',
       headers: {
         'Content-type': 'application/json',
